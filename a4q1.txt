@@ -32,6 +32,15 @@ should cycle through.
 The argument used in the program is also input. It is run in the fizzbuzz program.
 
 d)
+Line 13 has an include statement, which seems semi-related to Python's import function.
+Line 18 has a for loop, with "i" initialized at 1, the bounds set to the parameter n, and the increment operator.
+(i++ is more or less equal to i = i + 1)
+Line 36 asks for user input from the console, similar to the input() function
+Line 37 views the console input, and extracts the number and saves it to a variable, similar to the
+argv command from sys in Python.
 
-f) All C related information was acquired from:
+
+f) Most C related information was acquired from:
 https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html
+Any information relating to the <stdio.h> came from :
+https://pubs.opengroup.org/onlinepubs/7908799/xsh/stdio.h.html
