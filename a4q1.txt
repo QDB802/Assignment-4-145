@@ -20,7 +20,7 @@ return statements can be a data_type such as int, str, etc. It is not specified 
 b)
 The function call occurs on line 47 with the call:
 fizzbuzz(input);
-This is semi-identical to pythons function call except for the use of the semicolon on C
+This is semi-identical to pythons function call except for the use of the semicolon on C.
 C: function(parameters);
 Python: function(parameters)
 
@@ -39,8 +39,29 @@ Line 36 asks for user input from the console, similar to the input() function
 Line 37 views the console input, and extracts the number and saves it to a variable, similar to the
 argv command from sys in Python.
 
+e) What the code does is it initially asks for user to input a number, which is then assigned to variable input and used
+as an argument for the fizzbuzz function. In fizzbuzz, it runs the value through several loops in order to determine
+what is printed to console:
+* If the number is factorable by 3 and 5, it prints "FizzBuzz" to the console (ex. 15)
+* If the number is factorable by only 3, it prints "Fizz" to the console (ex. 9)
+* If the number is factorable by only 5, it prints "Buzz" to the console (ex. 20)
+* Otherwise, it simply prints the original number to the console (ex. 4)
+Example running of the program:
+Enter a number: 20
+1       2       Fizz    4       Buzz    Fizz    7       8       Fizz    Buzz    11      Fizz    13      14      FizzBuzz
+16      17      Fizz    19      Buzz
 
-f) Most C related information was acquired from:
+f)
+Most C related information was acquired from:
 https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html
-Any information relating to the <stdio.h> came from :
+Any information relating to the <stdio.h> came from:
 https://pubs.opengroup.org/onlinepubs/7908799/xsh/stdio.h.html
+The online C interpreter used was found at:
+https://www.onlinegdb.com/
+
+g)
+The time complexity of this program would be O(N)
+This is because let us use N for this program. The program will always iterate through the for loop N times.
+It is only N times because there is no secondary loops that it must go through. And even in the worst cases, it will
+always be N times. So, the time complexity would be O(N).
+
