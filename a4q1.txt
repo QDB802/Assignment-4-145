@@ -1,0 +1,28 @@
+Name: Ken Duff
+NSID: qdb802
+Student#: 11318955
+CMPT 145
+Instructor: Lauresa Stilling
+
+a)
+The Function Definition begins on line 25.
+It has a void return-type (i.e. None)
+A function named fizzbuzz.
+And a parameter, "n" with an int type (This is considered 1 parameter, not 2.)
+This is much different from python, with significant differences in formatting function definitions:
+
+C: return_type function_name(parameter-list) -> void fizzbuzz(int n)
+Python: def function(parameters):
+            ...
+            return return_value
+return statements can be a data_type such as int, str, etc. It is not specified in the function definition like in C.
+
+b)
+The function call occurs on line 47 with the call:
+fizzbuzz(input);
+This is semi-identical to pythons function call except for the use of the semicolon on C
+C: function(parameters);
+Python: function(parameters)
+
+f) All C related information was acquired from:
+https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html
