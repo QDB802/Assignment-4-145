@@ -24,5 +24,14 @@ This is semi-identical to pythons function call except for the use of the semico
 C: function(parameters);
 Python: function(parameters)
 
+c)
+The variable used in the program is "i". It is used in the loop.
+Input is also used as a variable, as it's updated once the inputs a number, then used in the main fizzbuzz program.
+The parameter used in the program is "n". it is used in the fizzbuzz program to determine the amount of times the loop
+should cycle through.
+The argument used in the program is also input. It is run in the fizzbuzz program.
+
+d)
+
 f) All C related information was acquired from:
 https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html
