@@ -11,6 +11,7 @@ def test_driver():
     fails = 0
     tests = 0
 
+    # Testing the to_string() function.
     # Testing an empty node chain
     test_node = None
     expected = 'EMPTY'
@@ -38,9 +39,17 @@ def test_driver():
         print("Testing to_string() with a multi-node chain, Expected:", expected, " Got: ", result)
     tests += 1
 
-    print(f"Tests Ran: {tests}" "\n"
-          f"Tests Succeeded: {tests-fails}/{tests}" "\n"
-          f"Tests Failed: {fails}")
+    # Testing a multi-node chain, all of various types.
+    test_node = n.node(1, n.node('two', n.node(3.0)))
+    expected = '[ 1 | *-]-->[ two | *-]-->[ 3.0 | / ]'
+    result = to_string(test_node)
+    if result != expected:
+        fails += 1
+        print("Testing to_string() with a multi-node chain, Expected:", expected, " Got: ", result)
+    tests += 1
 
+    print(f"Tests Ran: {tests}" "\n"
+          f"Tests Succeeded: {tests - fails}/{tests}" "\n"
+          f"Tests Failed: {fails}")
 
 test_driver()
