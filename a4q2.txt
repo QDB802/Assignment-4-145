@@ -6,7 +6,7 @@ Instructor: Lauresa Stilling
 
 a)
 def search(L, target):
-    # L is a list                           O(1)
+    # L is a list
     found = False                           O(1)
     i = 0                                   O(1)
     while i < len(L) and not found:         O(N)
@@ -21,7 +21,7 @@ since there are no secondary lists to go through, the complexity is related to N
 
 b)
 def repeat (x):
-    # x is an integer        O(1)
+    # x is an integer
     for i in range (1000):   O(1)
         print (x)            O(1)
 
@@ -42,3 +42,18 @@ The time complexity for this program is O(1). The program will always perform a 
 the input is into the program. So the complexity only depends on the amount if/else comparisons made.
 
 d)
+def is_prime ( a ):
+    # a is an integer
+    if a == 1:                  O(1)
+        return False            O(1)
+    elif a == 2 or a == 3:      O(1)
+        return True             O(1)
+    result = True               O(1)
+    for i in range (2 , a //2): O(N)
+        if a % i == 0:          O(1)
+            result = False      O(1)
+    return True                 O(1)
+
+The time complexity for this program is O(N) or O(a) for function parameters. The program in its worst case scenario
+will have to iterate through the range of numbers.
+
