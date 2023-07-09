@@ -57,3 +57,28 @@ def is_prime ( a ):
 The time complexity for this program is O(N) or O(a) for function parameters. The program in its worst case scenario
 will have to iterate through the range of numbers.
 
+e)
+def find_triples ( L ):
+    # L is a list
+    if len ( L ) == 0:               O(1)
+        return 0                     O(1)
+    L = sorted (L)                   O(N log N)
+    triples = 0                      O(1)
+    repeats = 1                      O(1)
+    prev = L[0]                      O(1)
+    for i in range (1, len(L)):      O(N)
+        cur = L [i]                  O(1)
+        if cur != prev :             O(1)
+            repeats = 1              O(1)
+        else :                       O(1)
+            repeats += 1             O(1)
+            if repeats == 3:         O(1)
+                triples += 1         O(1)
+        prev = cur                   O(1)
+
+    return triples
+
+The program has the time complexity of O(N log N)/O(L log L). This is because of the use of the
+python sorted() function, which naturally has the time complexity O(N log N). But, with the addition of the
+range function, it adds a range function with notation O(N). However, since Big-O notation only uses
+the largest N, the time complexity for this function is O(L log L).
