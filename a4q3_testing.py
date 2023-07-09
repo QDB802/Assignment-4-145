@@ -17,7 +17,7 @@ def test_driver():
     result = to_string(test_node)
     if result != expected:
         fails += 1
-        print("Testing to_string() with", test_node, "   Expected:", expected, " Got: ", result)
+        print("Testing to_string() with a blank chain, Expected:", expected, " Got: ", result)
     tests += 1
 
     # Testing a one node chain
@@ -26,16 +26,16 @@ def test_driver():
     result = to_string(test_node)
     if result != expected:
         fails += 1
-        print("Testing to_string() with", test_node, "   Expected:", expected, " Got: ", result)
+        print("Testing to_string() with a single-node chain, Expected:", expected, " Got: ", result)
     tests += 1
 
     # Testing a multi-node chain, all the same type (int).
     test_node = n.node(1, n.node(2, n.node(3)))
-    expected = '[ 1 | *-]-->[ 2 | *-]-->[3 | / ]'
+    expected = '[ 1 | *-]-->[ 2 | *-]-->[ 3 | / ]'
     result = to_string(test_node)
     if result != expected:
         fails += 1
-        print("Testing to_string() with", test_node, "   Expected:", expected, " Got: ", result)
+        print("Testing to_string() with a multi-node chain, Expected:", expected, " Got: ", result)
     tests += 1
 
     print(f"Tests Ran: {tests}" "\n"

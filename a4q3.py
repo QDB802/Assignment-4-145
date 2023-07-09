@@ -27,7 +27,7 @@ def to_string(node_chain):
         # If the node chain has reached its end, it caps it off with this.
         result += ' / ]'
     else:
-        result += ' *-]-->[ {} |'.format(str(to_string(next_node)))
+        result += ' *-]-->{}'.format(str(to_string(next_node)))
 
     return result
 
