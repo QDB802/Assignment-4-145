@@ -1,0 +1,20 @@
+Name: Ken Duff
+NSID: qdb802
+Student#: 11318955
+CMPT 145
+Instructor: Lauresa Stilling
+
+a)
+def search(L, target):
+    # L is a list                           O(1)
+    found = False                           O(1)
+    i = 0                                   O(1)
+    while i < len(L) and not found :     O(N)
+        if L[i] == target :              O(1)
+            found = True                    O(1)
+        i += 1                              O(1)
+    return found                            O(1)
+
+The time complexity for this program is O(N) or (O(L) if we use the function parameter. This is because for a worst-case
+scenario list of N-Size, where the target is the last value, the program will cycle through the N-sized list, and
+since there are no secondary lists to go through, the complexity is related to N, or in the case of parameters; L.
