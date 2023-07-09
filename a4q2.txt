@@ -18,3 +18,12 @@ def search(L, target):
 The time complexity for this program is O(N) or (O(L) if we use the function parameter. This is because for a worst-case
 scenario list of N-Size, where the target is the last value, the program will cycle through the N-sized list, and
 since there are no secondary lists to go through, the complexity is related to N, or in the case of parameters; L.
+
+b)
+def repeat (x):
+    # x is an integer
+    for i in range (1000):
+        print (x)
+
+The time complexity for this program is O(1). The program always iterates exactly 1000 times, no matter what integer
+is input into the program, it always runs through a constant amount of times.
