@@ -9,8 +9,8 @@ def search(L, target):
     # L is a list                           O(1)
     found = False                           O(1)
     i = 0                                   O(1)
-    while i < len(L) and not found :     O(N)
-        if L[i] == target :              O(1)
+    while i < len(L) and not found:         O(N)
+        if L[i] == target:                  O(1)
             found = True                    O(1)
         i += 1                              O(1)
     return found                            O(1)
@@ -21,9 +21,24 @@ since there are no secondary lists to go through, the complexity is related to N
 
 b)
 def repeat (x):
-    # x is an integer
-    for i in range (1000):
-        print (x)
+    # x is an integer        O(1)
+    for i in range (1000):   O(1)
+        print (x)            O(1)
 
 The time complexity for this program is O(1). The program always iterates exactly 1000 times, no matter what integer
 is input into the program, it always runs through a constant amount of times.
+
+c)
+def compare (a, b):
+    # a and b are integers
+    if a > b:           O(1)
+        return 1        O(1)
+    elif b > a:         O(1)
+        return -1       O(1)
+    else:               O(1)
+        return 0        O(1)
+
+The time complexity for this program is O(1). The program will always perform a set amount of operations no matter what
+the input is into the program. So the complexity only depends on the amount if/else comparisons made.
+
+d)
