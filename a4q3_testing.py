@@ -4,7 +4,7 @@
 # CMPT 145
 # Instructor: Lauresa Stilling
 
-from a4q3 import to_string, copy
+from a4q3 import to_string, copy, replace
 import node as n
 
 def test_driver():
@@ -98,6 +98,42 @@ def test_driver():
     tests += 1
 
     # Testing the replace() function.
+
+    # Testing an empty node chain.
+    test_node = None
+    expected = None
+    result = replace(test_node, 1, 10)
+    if result != expected:
+        fails += 1
+        print("Testing replace() with a blank chain, Expected:", expected, " Got: ", result)
+    tests += 1
+
+    # Testing the replacement of a node chain that doesn't have the element.
+    test_node = n.node(10, n.node(2, n.node(3)))
+    expected = '[ 10 | *-]-->[ 2 | *-]-->[ 3 | / ]'
+    result = to_string(replace(test_node, 1, 4))
+    if result != expected:
+        fails += 1
+        print("Testing to_string() with a single-node chain, Expected:", expected, " Got: ", result)
+    tests += 1
+
+    # Testing the replacement of a node chain that has only one target element.
+    test_node = n.node(10, n.node(2, n.node(3)))
+    expected = '[ 1 | *-]-->[ 2 | *-]-->[ 3 | / ]'
+    result = to_string(replace(test_node, 10, 1))
+    if result != expected:
+        fails += 1
+        print("Testing to_string() with a single-node chain, Expected:", expected, " Got: ", result)
+    tests += 1
+
+    # Testing the replacement of a node chain that has several of the target element.
+    test_node = n.node(2, n.node(2, n.node(3)))
+    expected = '[ 3 | *-]-->[ 3 | *-]-->[ 3 | / ]'
+    result = to_string(replace(test_node, 2, 3))
+    if result != expected:
+        fails += 1
+        print("Testing to_string() with a single-node chain, Expected:", expected, " Got: ", result)
+    tests += 1
 
     print(f"Tests Ran: {tests}" "\n"
           f"Tests Succeeded: {tests - fails}/{tests}" "\n"
