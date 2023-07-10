@@ -4,7 +4,7 @@
 # CMPT 145
 # Instructor: Lauresa Stilling
 
-from a4q3 import to_string
+from a4q3 import to_string, copy
 import node as n
 
 def test_driver():
@@ -12,7 +12,8 @@ def test_driver():
     tests = 0
 
     # Testing the to_string() function.
-    # Testing an empty node chain
+
+    # Testing an empty node chain.
     test_node = None
     expected = 'EMPTY'
     result = to_string(test_node)
@@ -21,7 +22,7 @@ def test_driver():
         print("Testing to_string() with a blank chain, Expected:", expected, " Got: ", result)
     tests += 1
 
-    # Testing a one node chain
+    # Testing a one node chain.
     test_node = n.node(5)
     expected = '[ 5 | / ]'
     result = to_string(test_node)
