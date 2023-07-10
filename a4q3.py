@@ -5,6 +5,8 @@
 # Instructor: Lauresa Stilling
 
 import node as n
+
+
 def to_string(node_chain):
     """
     Purpose:
@@ -31,6 +33,7 @@ def to_string(node_chain):
         result += ' *-]-->{}'.format(str(to_string(next_node)))
 
     return result
+
 
 def copy(node_chain):
     """
