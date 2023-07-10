@@ -46,15 +46,12 @@ def copy(node_chain):
     """
     # Checks if the node to be copied is empty.
     if node_chain is None:
-        return 'EMPTY'
+        return None
     else:
-        # Initializes the copy node as a blank.
+        # Initializes a blank copy, copies the first value of the original node and sets the first value to the copy.
         node_copy = n.node(None)
-        # Copies the first value of the original node
         node_val = node_chain.get_data()
-        # Sets the copy node to the value.
         node_copy.set_data(node_val)
-        # Cycles to the next node.
         next_node = node_chain.get_next()
     # Recursively calls the program until the ending node has been reached.
     if next_node is not None:
@@ -62,3 +59,21 @@ def copy(node_chain):
         node_copy.set_next(next_copy)
 
     return node_copy
+
+
+def replace(node_chain, target, replacement):
+    # Checks if the node that is empty.
+    if node_chain is None:
+        return None
+    else:
+        # If the specified node has the target, it updates the node and then cycles to the next.
+        if node_chain.get_data() == target:
+            node_chain.set_data(replacement)
+            next_node = node_chain.get_next()
+        # If the specified node doesn't have the target, it simply cycles to the next.
+        else:
+            next_node = node_chain.get_next()
+    # Once the node chain reaches the end it recursively performs the actions.
+    if next_node is not None:
+        replace(next_node, target, replacement)
+    return node_chain

@@ -53,7 +53,7 @@ def test_driver():
 
     # Testing an empty node chain.
     test_node = None
-    expected = 'EMPTY'
+    expected = None
     result = copy(test_node)
     if result != expected:
         fails += 1
