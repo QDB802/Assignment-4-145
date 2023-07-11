@@ -3,7 +3,7 @@
 # Student#: 11318955
 # CMPT 145
 # Instructor: Lauresa Stilling
-
+import os as os
 def maze_conversion(input_maze):
     """
         Purpose:
@@ -15,8 +15,8 @@ def maze_conversion(input_maze):
     """
     f = open(input_maze, "r")
     lines = f.readlines()
-    maze = [[value for value in line.rstrip() if value != ' '] for line in lines]
     # This list comprehension is used to strip away all
+    maze = [[value for value in line.rstrip() if value != ' '] for line in lines]
     f.close()
     return maze
 
@@ -31,7 +31,27 @@ def SolveMaze(maze, current, goal):
         goal: A tuple of the ending coordinates.
     Return:
     """
+    # Converts the maze into the list of lists, and converts the tuples into single coordinates.
     maze_list = maze_conversion(maze)
-    print(maze_list)
+    current_row, current_col = current
+    target_row, target_col = goal
 
-SolveMaze("Maze1.txt", 1, 1)
+    # Using the os tools in order to add the completed into the file name to organize the files.
+    file_name, file_ext = os.path.splitext(maze)
+    output_file_name = file_name + "-completed" + file_ext
+
+    # If the maze's start and end are at the exact same position, it will convert the location to a 'P' then
+    # output the finished maze.
+    if current_row == target_row and current_col == target_col:
+        g = open(output_file_name, 'w')
+        maze_list[current_row][current_col] = 'P'
+        for row in maze_list:
+            g.write(' '.join(row) + '\n')
+
+
+
+
+
+
+
+SolveMaze("Maze1.txt", (1,1), (1,1))
