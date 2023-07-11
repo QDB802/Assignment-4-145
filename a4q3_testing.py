@@ -114,7 +114,16 @@ def test_driver():
     result = to_string(replace(test_node, 1, 4))
     if result != expected:
         fails += 1
-        print("Testing to_string() with a single-node chain, Expected:", expected, " Got: ", result)
+        print("Testing replace() with a single-node chain, Expected:", expected, " Got: ", result)
+    tests += 1
+
+    # Testing the replacement of a one node chain
+    test_node = n.node(1)
+    expected = '[ 7 | / ]'
+    result = to_string(replace(test_node, 1, 7))
+    if result != expected:
+        fails += 1
+        print("Testing replace() with a single-node chain, Expected:", expected, " Got: ", result)
     tests += 1
 
     # Testing the replacement of a node chain that has only one target element.
@@ -123,7 +132,7 @@ def test_driver():
     result = to_string(replace(test_node, 10, 1))
     if result != expected:
         fails += 1
-        print("Testing to_string() with a single-node chain, Expected:", expected, " Got: ", result)
+        print("Testing replace() with a single-node chain, Expected:", expected, " Got: ", result)
     tests += 1
 
     # Testing the replacement of a node chain that has several of the target element.
@@ -132,7 +141,7 @@ def test_driver():
     result = to_string(replace(test_node, 2, 3))
     if result != expected:
         fails += 1
-        print("Testing to_string() with a single-node chain, Expected:", expected, " Got: ", result)
+        print("Testing replace() with a single-node chain, Expected:", expected, " Got: ", result)
     tests += 1
 
     print(f"Tests Ran: {tests}" "\n"
