@@ -4,8 +4,6 @@
 # CMPT 145
 # Instructor: Lauresa Stilling
 
-import os as os
-
 
 def maze_conversion(input_maze):
     """
@@ -36,62 +34,59 @@ def move_validity(lst, current_row, current_col):
             A Boolean determining the move validity, True for a valid move, False for an invalid move.
     """
     row_numbers = len(lst)
-    col_numbers = len(lst[0])
-
-    # If the move is attempting to backtrack or enter a wall, it will fail.
-    if lst[current_row][current_col] != '0':
+    col_numbers = len(lst[1])
+    if current_row < 0 or current_row >= row_numbers:
         return False
-    if (current_row < 0 or current_row >= row_numbers) or (current_col < 0 or current_col >= col_numbers):
+    elif current_col < 0 or current_col >= col_numbers:
+        return False
+    if lst[current_row][current_col] != '0':
         return False
     else:
         return True
 
 
-def solvemaze(maze_list, current, goal):
+def SolveMaze(maze_list, current, goal):
     """
-       Purpose:
-           Converts the initial maze file into a list of lists maze.
-       Parameters:
-           maze_list: The initial maze file to be converted into the list of lists and explored.
-           current: A tuple of the starting position or current position for the maze.
-           goal: A tuple of the ending coordinates.
-       Return:
+    Purpose:
+        Iterates through the maze list and determines the way to get out of it.
+    Parameters:
+        maze_list: The initial maze file to be converted into the list of lists and explored.
+        current: A tuple of the starting position or current position for the maze.
+        goal: A tuple of the ending coordinates.
+    Return:
     """
-    current_row, current_col = current
+    # Converts the tuples into single coordinates.
+    for i in maze_list:
+        print(*i)
+    print("\n")
     target_row, target_col = goal
 
     # If the maze's current position and end are at the exact same position, it will convert the location to a 'P', then
     # output the finished maze.
-    if current_row == target_row and current_col == target_col:
-        maze_list[current_row][current_col] = 'P'
+    if current[0] == target_row and current[1] == target_col:
         return True
 
     # Checks the move validity to ensure move is not going out of bounds or repeating.
-    if not move_validity(maze_list, current_row, current_col):
+    if not move_validity(maze_list, current[0], current[1]):
         return False
-    # Sets the current space to a P, to ensure no backtracking and show where path is.
-    maze_list[current_row][current_col] = "P"
 
-    # List of Tuples containing all possible moves in the 4 directions.
+    maze_list[current[0]][current[1]] = "P"
+
     for ra, ca in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
-        new_row = current_row + ra
-        new_col = current_col + ca
-        solvemaze(maze_list, (new_row, new_col), goal)
+        new_row = current[0] + ra
+        new_col = current[1] + ca
+        if new_row < 6 and new_col < 6:
+            if SolveMaze(maze_list, (new_row, new_col), goal):
+                return True
 
-def main():
-    maze_file = "Maze1.txt"
-    maze = maze_conversion(maze_file)
-    start_position = (0, 3)
-    goal_position = (4, 5)
-
-    if solvemaze(maze, start_position, goal_position):
-        # Using the os tools to modify the output file name for completed maze.
-        file_name, file_ext = os.path.splitext(maze_file)
-        output_file_name = file_name + "-completed" + file_ext
-
-        f = open(output_file_name, 'w')
-        for row in maze:
-            f.write(' '.join(row) + '\n')
+    maze_list[current[0]][current[1]] = '0'
+    return False
 
 
-main()
+maze = maze_conversion("Maze1.txt")
+if SolveMaze(maze, (0, 3), (4, 5)):
+    for row in maze:
+        print(" ".join(str(cell) for cell in row))
+else:
+    print("No path exists.")
+
