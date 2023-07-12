@@ -18,7 +18,7 @@ def maze_conversion(input_maze):
     """
     f = open(input_maze, "r")
     lines = f.readlines()
-    # This list comprehension is used to strip away all
+    # This list comprehension is used to strip away all whitspace and then paste it properly into list of lists.
     maze = [[value for value in line.rstrip() if value != ' '] for line in lines]
     f.close()
     return maze
@@ -39,7 +39,7 @@ def move_validity(lst, current_row, current_col):
     col_numbers = len(lst[0])
 
     # If the move is attempting to backtrack or enter a wall, it will fail.
-    if lst[current_row][current_col] != 0:
+    if lst[current_row][current_col] != '0':
         return False
     if (current_row < 0 or current_row >= row_numbers) or (current_col < 0 or current_col >= col_numbers):
         return False
@@ -66,17 +66,29 @@ def SolveMaze(maze, current, goal):
     file_name, file_ext = os.path.splitext(maze)
     output_file_name = file_name + "-completed" + file_ext
 
-    # Checks the move validity to ensure move is not going out of bounds or repeating.
-    if not move_validity(maze_list, current_row, current_col):
-        return False
-
-    # If the maze's start and end are at the exact same position, it will convert the location to a 'P' then
+    # If the maze's current position and end are at the exact same position, it will convert the location to a 'P', then
     # output the finished maze.
     if current_row == target_row and current_col == target_col:
         g = open(output_file_name, 'w')
         maze_list[current_row][current_col] = 'P'
         for row in maze_list:
             g.write(' '.join(row) + '\n')
+        g.close()
+
+    # Checks the move validity to ensure move is not going out of bounds or repeating.
+    if not move_validity(maze_list, current_row, current_col):
+        return False
+
+    maze_list[current_row][current_col] = "P"
+
+    for ra, ca in [(-1, 0), (0, -1), (1, 0), (0,1)]:
+        new_row = current_row + ra
+        new_col = current_col + ca
+        SolveMaze(maze_list, (new_row, new_col), goal)
+
+    maze_list[current_row][current_col] = '0'
+    return False
 
 
-SolveMaze("Maze1.txt", (1, 1), (1, 1))
+
+SolveMaze("Maze1.txt", (0, 3), (4, 5))
