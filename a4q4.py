@@ -16,10 +16,10 @@ def maze_conversion(input_maze):
     """
     f = open(input_maze, "r")
     lines = f.readlines()
-    # This list comprehension is used to strip away all whitspace and then paste it properly into list of lists.
-    maze = [[value for value in line.rstrip() if value != ' '] for line in lines]
+    # This list comprehension is used to strip away all whitespace and then paste it properly into list of lists.
+    converted_maze = [[value for value in line.rstrip() if value != ' '] for line in lines]
     f.close()
-    return maze
+    return converted_maze
 
 
 def move_validity(lst, current_row, current_col):
@@ -33,12 +33,16 @@ def move_validity(lst, current_row, current_col):
         Return:
             A Boolean determining the move validity, True for a valid move, False for an invalid move.
     """
+    # Sets the size of the maze.
     row_numbers = len(lst)
     col_numbers = len(lst[1])
+    # If the move exceeds the total rows, it fails.
     if current_row < 0 or current_row >= row_numbers:
         return False
-    elif current_col < 0 or current_col >= col_numbers:
+    # If the move exceeds the total columns, it fails.
+    if current_col < 0 or current_col >= col_numbers:
         return False
+    # If the move attempts to move onto a wall or a previous explored space, it fails.
     if lst[current_row][current_col] != '0':
         return False
     else:
@@ -56,14 +60,12 @@ def SolveMaze(maze_list, current, goal):
     Return:
     """
     # Converts the tuples into single coordinates.
-    for i in maze_list:
-        print(*i)
-    print("\n")
     target_row, target_col = goal
 
     # If the maze's current position and end are at the exact same position, it will convert the location to a 'P', then
     # output the finished maze.
     if current[0] == target_row and current[1] == target_col:
+        maze_list[target_row][target_col] = 'P'
         return True
 
     # Checks the move validity to ensure move is not going out of bounds or repeating.
@@ -72,21 +74,24 @@ def SolveMaze(maze_list, current, goal):
 
     maze_list[current[0]][current[1]] = "P"
 
+    # The directions that can be moved, either Up, Down, Left or Right.
     for ra, ca in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
         new_row = current[0] + ra
         new_col = current[1] + ca
-        if new_row < 6 and new_col < 6:
-            if SolveMaze(maze_list, (new_row, new_col), goal):
-                return True
+        if SolveMaze(maze_list, (new_row, new_col), goal):
+            return True
 
     maze_list[current[0]][current[1]] = '0'
     return False
 
 
-maze = maze_conversion("Maze1.txt")
-if SolveMaze(maze, (0, 3), (4, 5)):
-    for row in maze:
-        print(" ".join(str(cell) for cell in row))
-else:
-    print("No path exists.")
+def main(maze_file):
+    maze = maze_conversion(maze_file)
+    if SolveMaze(maze, (0, 3), (4, 5)):
+        for row in maze:
+            print(" ".join(str(cell) for cell in row))
+    else:
+        print("No path exists.")
+
+main("Maze1.txt")
 
