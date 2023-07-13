@@ -68,6 +68,10 @@ def SolveMaze(maze_list, current, goal):
         maze_list[target_row][target_col] = 'P'
         return True
 
+    # If the target is a 1, always returns False since goal is impossible to reach.
+    if maze_list[target_row][target_col] == '1':
+        return False
+
     # Checks the move validity to ensure move is not going out of bounds or repeating.
     if not move_validity(maze_list, current[0], current[1]):
         return False
@@ -85,13 +89,11 @@ def SolveMaze(maze_list, current, goal):
     return False
 
 
-def main(maze_file):
-    maze = maze_conversion(maze_file)
-    if SolveMaze(maze, (0, 3), (4, 5)):
-        for row in maze:
-            print(" ".join(str(cell) for cell in row))
-    else:
-        print("No path exists.")
+maze = maze_conversion("Maze3.txt")
+start = (3, 0)
+target = (23, 30)
+if SolveMaze(maze, start, target):
+    for row in maze:
+        print(" ".join(str(cell) for cell in row))
 
-main("Maze1.txt")
 
