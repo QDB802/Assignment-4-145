@@ -1,0 +1,130 @@
+Name: Ken Duff
+NSID: qdb802
+Student#: 11318955
+CMPT 145
+Instructor: Lauresa Stilling
+
+a)
+def search(L, target):
+    # L is a list
+    found = False                           O(1)
+    i = 0                                   O(1)
+    while i < len(L) and not found:         O(N)
+        if L[i] == target:                  O(1)
+            found = True                    O(1)
+        i += 1                              O(1)
+    return found                            O(1)
+
+The time complexity for this program is O(N) or (O(L) if we use the function parameter. This is because for a worst-case
+scenario list of N-Size, where the target is the last value, the program will cycle through the N-sized list, and
+since there are no secondary lists to go through, the complexity is related to N, or in the case of parameters; L.
+
+b)
+def repeat (x):
+    # x is an integer
+    for i in range (1000):   O(1)
+        print (x)            O(1)
+
+The time complexity for this program is O(1). The program always iterates exactly 1000 times, no matter what integer
+is input into the program, it always runs through a constant amount of times.
+
+c)
+def compare (a, b):
+    # a and b are integers
+    if a > b:           O(1)
+        return 1        O(1)
+    elif b > a:         O(1)
+        return -1       O(1)
+    else:               O(1)
+        return 0        O(1)
+
+The time complexity for this program is O(1). The program will always perform at most 3 operations no matter what
+the input is into the program. So the complexity only depends on the amount if/else comparisons made.
+
+d)
+def is_prime ( a ):
+    # a is an integer
+    if a == 1:                  O(1)
+        return False            O(1)
+    elif a == 2 or a == 3:      O(1)
+        return True             O(1)
+    result = True               O(1)
+    for i in range (2 , a //2): O(N)
+        if a % i == 0:          O(1)
+            result = False      O(1)
+    return True                 O(1)
+
+The time complexity for this program is O(N) or O(a) for function parameters. The program in its worst case scenario
+will have to iterate through the range of numbers.
+
+e)
+def find_triples(L):
+    # L is a list
+    if len(L) == 0:                  O(1)
+        return 0                     O(1)
+    L = sorted(L)                    O(N log N)
+    triples = 0                      O(1)
+    repeats = 1                      O(1)
+    prev = L[0]                      O(1)
+    for i in range(1, len(L)):       O(N)
+        cur = L[i]                   O(1)
+        if cur != prev :             O(1)
+            repeats = 1              O(1)
+        else:                        O(1)
+            repeats += 1             O(1)
+            if repeats == 3:         O(1)
+                triples += 1         O(1)
+        prev = cur                   O(1)
+
+    return triples                   O(1)
+
+The program has the time complexity O(N log N)/O(L log L). This is because of the use of the
+python sorted() function, which I have made the assumption that it is O(N log N). But, with the addition of the
+range function, it adds a range function with notation O(N). However, since Big-O notation only uses
+the largest N, the time complexity for this function is O(L log L).
+
+f)
+def interleave (L1, L2):
+    # L1 and L2 are lists
+    i = 0                              O(1)
+    result = []                        O(1)
+    while i < min(len(L1), len(L2)):   O(min(N, M))
+        result.append(L1[i])           O(1)
+        result.append(L2[i])           O(1)
+        i += 1                         O(1)
+    if len(L1) > len(L2):              O(max(M, N))
+        longer = L1                    O(1)
+    else:                              O(1)
+        longer = L2                    O(1)
+    for j in range(i, len(longer)):    O(max(M, N))
+        result.append(longer[j])       O(1)
+    return result                      O(1)
+
+The program has the time complexity , O(N) or in terms of parameters O(max(L1, L2)).
+This is because the program will always use the maximum of the two in the worst case scenario, using the maximum
+of the two in the range function, and in the worst case one list will be much shorter and the other will be much longer.
+
+g) For a single elimination chest tournament, We have N players.
+For the example we will use 16 Players.
+For the first round of our tournament, we need N/2 Games (16/2 = 8 Games).
+For the second round, we need N/4 Games (16/4 = 4 Games).
+For the third round, we need N/8 Games (16/8 = 2 Games).
+For the fourth round is N/16 (16/16 = 1 Game).
+
+We have a total of 31 games in 4 rounds for 16 players.
+This is also the case for a 4 player tournament, with them playing 3 games in 2 rounds.
+
+So, the amount of games played is related to players by the ratio: N:G-1
+
+h) For a round-robin tournament, we have N players.
+We shall use 8 players.
+For this example, instead of using math I simply created a general set of loops which would explain it:
+
+for i in range(num_players - 1):
+    for j in range(i + 1, num_players):
+
+This set of loops would iterate through all possible combinations while neglecting duplicates.
+With 8 Players, this would yield 28 rounds.
+However, these loops have the Big-O Notations of O(N) and O(N).
+So, the total Big-O notation for the round-robin would be O(N^2).
+
