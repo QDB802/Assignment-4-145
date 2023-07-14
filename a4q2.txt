@@ -38,7 +38,7 @@ def compare (a, b):
     else:               O(1)
         return 0        O(1)
 
-The time complexity for this program is O(1). The program will always perform a set amount of operations no matter what
+The time complexity for this program is O(1). The program will always perform at most 3 operations no matter what
 the input is into the program. So the complexity only depends on the amount if/else comparisons made.
 
 d)
@@ -79,7 +79,7 @@ def find_triples(L):
     return triples                   O(1)
 
 The program has the time complexity O(N log N)/O(L log L). This is because of the use of the
-python sorted() function, which naturally has the time complexity O(N log N). But, with the addition of the
+python sorted() function, which I have made the assumption that it is O(N log N). But, with the addition of the
 range function, it adds a range function with notation O(N). However, since Big-O notation only uses
 the largest N, the time complexity for this function is O(L log L).
 
@@ -88,19 +88,21 @@ def interleave (L1, L2):
     # L1 and L2 are lists
     i = 0                              O(1)
     result = []                        O(1)
-    while i < min(len(L1), len(L2)):   O()
+    while i < min(len(L1), len(L2)):   O(min(N, M))
         result.append(L1[i])           O(1)
         result.append(L2[i])           O(1)
         i += 1                         O(1)
-    if len(L1) > len(L2):              O(1)
+    if len(L1) > len(L2):              O(max(M, N))
         longer = L1                    O(1)
     else:                              O(1)
         longer = L2                    O(1)
-    for j in range(i, len(longer)):    O()
+    for j in range(i, len(longer)):    O(max(M, N))
         result.append(longer[j])       O(1)
     return result                      O(1)
 
-The program has the time complexity O().
+The program has the time complexity , O(N) or in terms of parameters O(max(L1, L2)).
+This is because the program will always use the maximum of the two in the worst case scenario, using the maximum
+of the two in the range function, and in the worst case one list will be much shorter and the other will be much longer.
 
 g) For a single elimination chest tournament, We have N players.
 For the example we will use 16 Players.
