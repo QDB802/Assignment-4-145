@@ -7,6 +7,7 @@
 from a4q3 import to_string, copy, replace
 import node as n
 
+
 def test_driver():
     fails = 0
     tests = 0
@@ -94,7 +95,7 @@ def test_driver():
     if test_node != expected_test and copied_node != expected_copy:
         fails += 1
         print("Testing to_string() with a multi-node chain, Expected:", expected_test, "&", expected_copy,
-        " Got: ", test_node, "&", copied_node)
+              " Got: ", test_node, "&", copied_node)
     tests += 1
 
     # Testing the replace() function.
@@ -147,5 +148,6 @@ def test_driver():
     print(f"Tests Ran: {tests}" "\n"
           f"Tests Succeeded: {tests - fails}/{tests}" "\n"
           f"Tests Failed: {fails}")
+
 
 test_driver()
