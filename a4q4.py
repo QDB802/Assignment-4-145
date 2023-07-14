@@ -49,7 +49,7 @@ def move_validity(lst, current_row, current_col):
         return True
 
 
-def SolveMaze(maze_list, current, goal):
+def SolveMaze(maze_list, current, goal, maze_option):
     """
     Purpose:
         Iterates through the maze list and determines the way to get out of it.
@@ -57,43 +57,94 @@ def SolveMaze(maze_list, current, goal):
         maze_list: The initial maze file to be converted into the list of lists and explored.
         current: A tuple of the starting position or current position for the maze.
         goal: A tuple of the ending coordinates.
+        maze_option: A Boolean which determines if the program will analyze all paths or just one.
     Return:
+        A Boolean if maze_option is True, or a List of Lists if moze_option is False.
     """
     # Converts the tuples into single coordinates.
     target_row, target_col = goal
 
+    if maze_option is True:
+        # Initializes a main list to store other lists in.
+        paths = []
+
+    # If the target is a 1, always returns False or a Blank List since goal is impossible to reach.
+    if maze_list[target_row][target_col] == '1':
+        if maze_option is True:
+            # Returns the blank list since it is impossible to get to the path.
+            return []
+            # Simply returns False since the maze is unsolvable.
+        else:
+            return False
+
     # If the maze's current position and end are at the exact same position, it will convert the location to a 'P', then
-    # output the finished maze.
+    # output the finished maze. As well, it uses lists of lists in order to save the paths better if enabled.
     if current[0] == target_row and current[1] == target_col:
         maze_list[target_row][target_col] = 'P'
-        return True
-
-    # If the target is a 1, always returns False since goal is impossible to reach.
-    if maze_list[target_row][target_col] == '1':
-        return False
+        if maze_option is True:
+            # Adds the target coordinates to the list of lists of all paths.
+            return [[current]]
+        else:
+            # Returns True since it is possible to find a path.
+            return True
 
     # Checks the move validity to ensure move is not going out of bounds or repeating.
     if not move_validity(maze_list, current[0], current[1]):
-        return False
+        if maze_option is True:
+            # If move validity fails, it doesn't add anything to the list.
+            return []
+        else:
+            # If the move validity fails, simply returns False.
+            return False
 
+    # Changes the current space to a P
     maze_list[current[0]][current[1]] = "P"
 
     # The directions that can be moved, either Up, Down, Left or Right.
     for ra, ca in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
         new_row = current[0] + ra
         new_col = current[1] + ca
-        if SolveMaze(maze_list, (new_row, new_col), goal):
-            return True
+        if maze_option is True:
+            # Using new_paths to add all possible paths, then adds the new path to the paths list.
+            new_paths = SolveMaze(maze_list, (new_row, new_col), goal, maze_option)
+            for path in new_paths:
+                paths.append([current] + path)
+        else:
+            # Searches for the single path from the new position.
+            if SolveMaze(maze_list, (new_row, new_col), goal, maze_option):
+                return True
 
     maze_list[current[0]][current[1]] = '0'
-    return False
+
+    # Once a path, or all paths have been found, it exits the program.
+    if maze_option is True:
+        return paths
+    else:
+        return False
 
 
-maze = maze_conversion("Maze3.txt")
-start = (3, 0)
-target = (23, 30)
-if SolveMaze(maze, start, target):
-    for row in maze:
-        print(" ".join(str(cell) for cell in row))
+def main(maze, start, target, maze_option):
+    # If the maze_option is set to True, it searches for all paths then prints them all.
+    if maze_option is True:
+        paths = SolveMaze(maze, start, target, maze_option)
+        # Prints all possible paths for a maze.
+        for path in paths:
+            maze_copy = [row[:] for row in maze]
+            for position in path:
+                # For each position in the maze_copy, adds a 'P' since the coordinate was explored in the simulation.
+                maze_copy[position[0]][position[1]] = 'P'
+            for row in maze_copy:
+                print(" ".join(str(cell) for cell in row))
+            print("\n")
+    else:
+        # If the maze_option is set to False, it searches for the one path, and prints it and returns True.
+        if SolveMaze(maze, start, target, maze_option):
+            for row in maze:
+                print(" ".join(str(cell) for cell in row))
 
 
+maze = maze_conversion("Maze1.txt")
+start = (0, 3)
+target = (4, 5)
+maze_option = True
+main(maze, start, target, maze_option)
